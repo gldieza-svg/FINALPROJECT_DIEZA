@@ -1,0 +1,523 @@
+{
+  "info": {
+    "name": "Event Booking API",
+    "description": "Postman collection for the Event Booking REST API. Organized into three resource folders: Venues, Events, and Attendees, plus Relationship Endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [],
+  "item": [
+    {
+      "name": "Venues",
+      "item": [
+        {
+          "name": "Get All Venues",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/venues",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns a list of all venues."
+          }
+        },
+        {
+          "name": "Get Venue by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/venues/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns a single venue by ID, including its events. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Create Venue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Grand Hall\",\n  \"location\": \"123 Main Street, Manila\",\n  \"capacity\": 500,\n  \"description\": \"A large multi-purpose event hall.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/venues",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Creates a new venue. Requires: name, location, capacity. Returns 201 on success, 400 on validation failure."
+          }
+        },
+        {
+          "name": "Update Venue",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Grand Hall Updated\",\n  \"capacity\": 600\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/venues/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Updates an existing venue by ID. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Delete Venue",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/venues/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Deletes a venue by ID. Returns 404 if not found."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/events",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns all events with their associated venue."
+          }
+        },
+        {
+          "name": "Get Event by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/events/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns a single event by ID, including venue and registered attendees. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Tech Summit 2025\",\n  \"description\": \"Annual technology conference.\",\n  \"date\": \"2025-09-15\",\n  \"time\": \"09:00:00\",\n  \"price\": 150.00,\n  \"venueId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/events",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Creates a new event. Requires: title, date, time, venueId. Returns 201 on success."
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Tech Summit 2025 - Updated\",\n  \"price\": 175.00\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/events/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Updates an existing event by ID. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Delete Event",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/events/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Deletes an event by ID. Returns 404 if not found."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attendees",
+      "item": [
+        {
+          "name": "Get All Attendees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/attendees",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "attendees"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns a list of all registered attendees."
+          }
+        },
+        {
+          "name": "Get Attendee by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/attendees/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "attendees",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns a single attendee by ID, including their registered events. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Create Attendee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan Dela Cruz\",\n  \"email\": \"juan@example.com\",\n  \"phone\": \"+63 912 345 6789\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/attendees",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "attendees"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Creates a new attendee. Requires: name, email. Email must be unique. Returns 201 on success."
+          }
+        },
+        {
+          "name": "Update Attendee",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+63 999 000 0001\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/attendees/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "attendees",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Updates an attendee by ID. Returns 404 if not found."
+          }
+        },
+        {
+          "name": "Delete Attendee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/attendees/1",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "attendees",
+                "1"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Deletes an attendee by ID. Returns 404 if not found."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Relationship Endpoints",
+      "item": [
+        {
+          "name": "Register Attendee to Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attendeeId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/events/1/register",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1",
+                "register"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Registers an attendee to a specific event (many-to-many). Returns 201 on success, 400 if already registered, 404 if event or attendee not found."
+          }
+        },
+        {
+          "name": "Unregister Attendee from Event",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attendeeId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/events/1/unregister",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1",
+                "unregister"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Removes an attendee from a specific event. Returns 200 on success, 400 if not registered, 404 if not found."
+          }
+        },
+        {
+          "name": "List Attendees of an Event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/events/1/attendees",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "1",
+                "attendees"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Returns all attendees registered to a specific event. Returns 404 if event not found."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Tests",
+      "item": [
+        {
+          "name": "404 - Unknown Route",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/nonexistent-route",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "nonexistent-route"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Tests the 404 catch-all middleware. Should return a JSON error response."
+          }
+        },
+        {
+          "name": "404 - Get Non-existent Venue",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/venues/99999",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "venues",
+                "99999"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Should return 404 JSON error for a venue ID that does not exist."
+          }
+        },
+        {
+          "name": "404 - Get Non-existent Event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/events/99999",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "events",
+                "99999"
+              ],
+              "protocol": "http",
+              "port": "3000"
+            },
+            "description": "Should return 404 JSON error for an event ID that does not exist."
+          }
+        }
+      ]
+    }
+  ]
+}
